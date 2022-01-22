@@ -27,10 +27,11 @@ This action provides the number of failures since the last success for a specifi
 The number of failures since the last success for all the workflow runs.
 
 ## Example usage
-
+```
 uses: TopazJ/workflow-failure-history@v1.0
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   owner: TopazJ
   repo: integration-action-test
   workflow_id: e2e_test.yml
+```
