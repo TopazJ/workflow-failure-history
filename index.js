@@ -15,7 +15,7 @@ try {
     let page = 1;
 
     do {
-        let { data } = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs?page='+page, {
+        let { data } = octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs?page='+page, {
             owner: owner,
             repo: repo,
             workflow_id: workflow_id,
