@@ -1,0 +1,21 @@
+name: 'Workflow Failure History'
+description: 'Greet someone and record the time'
+inputs:
+  token:  # id of input
+    description: 'Token for repo access to get workflow run history'
+    required: true
+  owner:  # id of input
+    description: 'The owner username of the repository containing the workflow'
+    required: true
+  repo:  # id of input
+    description: 'The repository name containing the workflow'
+    required: true
+  workflow_id:
+    description: 'The name or id of the workflow which history is being pulled'
+    required: true
+outputs:
+  failures: # id of output
+    description: 'The number of failures since the last success'
+runs:
+  using: 'node16'
+  main: 'index.js'
