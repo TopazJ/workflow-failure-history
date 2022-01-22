@@ -7,6 +7,14 @@ try {
     const repo = core.getInput('repo');
     const workflow_id = core.getInput('workflow_id');
 
+    parse_workflow_runs(token, owner, repo, workflow_id);
+
+} catch (error) {
+    core.setFailed(error.message);
+}
+
+async function parse_workflow_runs(token, owner, repo, workflow_id){
+
     const octokit = new Octokit({ auth: token });
 
     let parsed_runs = 0;
@@ -15,7 +23,7 @@ try {
     let page = 1;
 
     do {
-        let { data } = octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs?page='+page, {
+        let { data } = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs?page='+page, {
             owner: owner,
             repo: repo,
             workflow_id: workflow_id,
@@ -42,6 +50,4 @@ try {
     } while (!success);
     console.log("Discovered " + failures + " failures since the last success.");
     core.setOutput("failures", failures);
-} catch (error) {
-    core.setFailed(error.message);
 }
